@@ -1,0 +1,157 @@
+<form
+  ngForm
+  #form="ngForm"
+  class="form-signin"
+  (ngSubmit)="loginUser(form.value)">
+  <h2 class="form-signin-heading text-center">Register to Chat</h2>
+  <div class="form-group">
+    <label for="username" class="sr-only">Email address</label>
+    <input
+      ngModel
+      name="username"
+      #username="ngModel"
+      id="username"
+      class="form-control"
+      type="text"
+      placeholder="Username"
+      required
+      minlength="4"
+      maxlength="64">
+    <div
+      class="alert alert-danger"
+      *ngIf="username.touched && !username.valid">
+      <div
+        *ngIf="username.errors.required">
+        Username is required.
+      </div>
+      <div
+        *ngIf="username.errors.minlength">
+        Username should have minimum {{ username.errors.minlength.requiredLength }} characters.
+      </div>
+      <div
+        *ngIf="username.errors.maxlength">
+        Username should have maximum {{ username.errors.maxlength.requiredLength }} characters.
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="firstName" class="sr-only">Firstname</label>
+    <input
+      ngModel
+      name="firstName"
+      #firstName="ngModel"
+      id="firstName"
+      class="form-control"
+      placeholder="First name"
+      required
+      maxlength="64"
+      pattern=".+"
+    >
+    <div
+      class="alert alert-danger"
+      *ngIf="firstName.touched && !firstName.valid">
+      <div
+        *ngIf="firstName.errors.required">
+        First name is required.
+      </div>
+      <div
+        *ngIf="firstName.errors.maxlength">
+        First name should have maximum 64 characters.
+      </div>
+      <div
+        *ngIf="firstName.errors.pattern">
+        First name doesn't match the pattern.
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="middleName" class="sr-only">Middle name</label>
+    <input
+      ngModel
+      name="middleName"
+      #middleName="ngModel"
+      id="middleName"
+      type="text"
+      class="form-control"
+      placeholder="Middle name"
+      maxlength="64">
+    <div
+      class="alert alert-danger"
+      *ngIf="!middleName.valid">
+      <div *ngIf="middleName.errors.maxlength">
+        Middle name should have maximum 64 characters.
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="lastName" class="sr-only">Last name</label>
+    <input
+    ngModel
+    name="lastName"
+    #lastName="ngModel"
+    id="lastName"
+    type="text"
+    class="form-control"
+    placeholder="Last name"
+    required
+    maxlength="64"
+    pattern=".+">
+    <div
+    class="alert alert-danger"
+    *ngIf="lastName.touched && !lastName.valid">
+      <div
+        *ngIf="lastName.errors.required">
+        Last name is required.
+      </div>
+      <div
+        *ngIf="lastName.errors.maxlength">
+        Last name should have maximum 64 characters.
+      </div>
+      <div
+        *ngIf="lastName.errors.pattern">
+        Last name doesn't match the pattern.
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="birthdate" class="sr-only">Birthdate</label>
+    <input
+    >
+  </div>
+  <div class="form-group">
+    <label for="password" class="sr-only">Password</label>
+    <input
+      ngModel
+      name="password"
+      #password="ngModel"
+      id="password"
+      class="form-control"
+      type="password"
+      placeholder="Password"
+      minlength="8"
+      maxlength="128"
+      required>
+    <div
+      class="alert alert-danger"
+      *ngIf="password.touched && !password.valid">
+      <div
+        *ngIf="password.errors.required">
+        Password is required.
+      </div>
+      <div
+        *ngIf="password.errors.minlength">
+        Password should be minimum {{ password.errors.minlength.requiredLength }} characters.
+      </div>
+    </div>
+  </div>
+  <button
+    class="btn btn-lg btn-primary btn-block"
+    type="submit">
+    Register
+  </button>
+  <button
+    class="btn btn-lg btn-primary btn-block"
+  (click)="redirectToLogin()">
+    Login
+  </button>
+</form>
