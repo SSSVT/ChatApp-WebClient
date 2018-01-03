@@ -1,0 +1,7 @@
+<div *ngIf="authService.isLoggedIn()" class="alert alert-danger">
+  {{ authService.currentUser.sub }}
+  <button  (click)="authService.logoutUser()" class="btn btn-light">
+    Logout
+  </button>
+</div>
+

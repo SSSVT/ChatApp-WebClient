@@ -1,30 +1,68 @@
+import {JwtHelper, tokenNotExpired} from 'angular2-jwt';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-
+import { Http, Headers, RequestOptions } from '@angular/http';
+import { Router } from '@angular/router';
+import 'rxjs/add/operator/map';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class AuthenticationService {
-  apiUrl: string;
 
-  constructor(private http: Http) {
-    this.apiUrl = 'http://localhost:53513/api/v1/';
+  constructor(private http: Http, private router: Router) {
   }
 
-  login(credentials) {
-    const newUrl = this.apiUrl + 'Token/LoginAsync/';
-    const body = {
-      username: credentials.username,
-      password: credentials.password
-    };
+  get currentUser(){
+    let token = localStorage.getItem('token');
+    if(!token)
+      return null;
 
-    let responseData;
+    return new JwtHelper().decodeToken(token);;
+  }
 
-    this.http.post(newUrl, body)
-      .subscribe(response => { responseData = response.json(); });
+  loginUser(credentials) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    const options = new RequestOptions({headers: headers});
 
+    return this.http.post('http://localhost:56120/api/v1/Token/LoginAsync/', JSON.stringify(credentials), options)
+      .map(response => {
+        let result = response.json();
+        if (result && result.token) {
+          localStorage.setItem('token', result.token);
+          return true;
+        }
+        return false;
+      });
+  }
+
+  registerUser(user) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.post('http://localhost:56120/api/v1/registration/Register/', JSON.stringify(user), options);
+  }
+
+  logoutUser() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+  }
+
+  isLoggedIn() {
+    return tokenNotExpired();
+
+    /*
+    let jwtHelper = new JwtHelper();
+    let token = localStorage.getItem('token');
+
+    if (!token)
+      return false;
+
+    let isExpired = jwtHelper.isTokenExpired(token);
+
+    return !isExpired;
+    */
+  }
 
 }
 
-
-
-}

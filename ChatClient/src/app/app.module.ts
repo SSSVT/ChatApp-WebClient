@@ -4,30 +4,39 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import {AuthenticationGuard} from './authentication.guard';
+
 import { AuthenticationService } from './authentication.service';
+import { UserService } from './user.service';
 
 import { AppComponent } from './app.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { ChatInterfaceComponent } from './chat-interface/chat-interface.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
+import {isMetadataSymbolicPrefixExpression} from '@angular/compiler-cli';
+import { FriendsComponent } from './friends/friends.component';
+import { HeaderComponent } from './header/header.component';
+import { MessagesComponent } from './messages/messages.component';
 
 
 const appRoutes: Routes = [
   {
     path: '',
-    component: LoginFormComponent
+    component: ChatInterfaceComponent,
+    canActivate: [AuthenticationGuard]
   },
   {
     path: 'login',
-    component: LoginFormComponent
+    component: LoginFormComponent,
   },
   {
     path: 'chat',
-    component: ChatInterfaceComponent
+    component: ChatInterfaceComponent,
+    canActivate: [AuthenticationGuard]
   },
   {
     path: 'register',
-    component: RegisterFormComponent
+    component: RegisterFormComponent,
   }
 ];
 
@@ -36,7 +45,10 @@ const appRoutes: Routes = [
     AppComponent,
     LoginFormComponent,
     ChatInterfaceComponent,
-    RegisterFormComponent
+    RegisterFormComponent,
+    FriendsComponent,
+    HeaderComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +57,10 @@ const appRoutes: Routes = [
     HttpModule
   ],
   providers: [
-    AuthenticationService
+    AuthenticationService,
+    UserService,
+
+    AuthenticationGuard
   ],
   bootstrap: [AppComponent]
 })

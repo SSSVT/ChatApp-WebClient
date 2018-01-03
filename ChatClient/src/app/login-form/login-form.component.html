@@ -5,6 +5,13 @@
   (ngSubmit)="loginUser(form.value)"
 >
   <h2 class="form-signin-heading text-center">Login to Chat</h2>
+
+  <div
+    class="alert alert-danger"
+    *ngIf="invalidLogin">
+    Invalid username and/or password.
+  </div>
+
   <div class="form-group">
     <label for="username" class="sr-only">Email address</label>
     <input
@@ -18,22 +25,6 @@
       required
       minlength="4"
       maxlength="64">
-    <div
-      class="alert alert-danger"
-      *ngIf="username.touched && !username.valid">
-      <div
-        *ngIf="username.errors.required">
-        Username is required.
-      </div>
-      <div
-        *ngIf="username.errors.minlength">
-        Username should have minimum {{ username.errors.minlength.requiredLength }} characters.
-      </div>
-      <div
-        *ngIf="username.errors.maxlength">
-        Username should have maximum {{ username.errors.maxlength.requiredLength }} characters.
-      </div>
-    </div>
   </div>
   <div class="form-group">
     <label for="password" class="sr-only">Password</label>
@@ -48,27 +39,11 @@
       minlength="8"
       maxlength="128"
       required>
-    <div
-      class="alert alert-danger"
-      *ngIf="password.touched && !password.valid">
-      <div
-        *ngIf="password.errors.required">
-        Password is required.
-      </div>
-      <div
-        *ngIf="password.errors.minlength">
-        Password should be minimum {{ password.errors.minlength.requiredLength }} characters.
-      </div>
-    </div>
   </div>
+
   <button
     class="btn btn-lg btn-primary btn-block"
     type="submit">
     Login
-  </button>
-  <button
-    class="btn btn-lg btn-primary btn-block"
-  (click)="redirectToRegister()">
-    Register
   </button>
 </form>

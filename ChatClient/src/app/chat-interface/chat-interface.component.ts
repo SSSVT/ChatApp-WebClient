@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-chat-interface',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatInterfaceComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthenticationService) {}
 
   ngOnInit() {
   }
