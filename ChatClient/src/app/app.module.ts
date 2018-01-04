@@ -13,7 +13,6 @@ import { AppComponent } from './app.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { ChatInterfaceComponent } from './chat-interface/chat-interface.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
-import {isMetadataSymbolicPrefixExpression} from '@angular/compiler-cli';
 import { FriendsComponent } from './friends/friends.component';
 import { HeaderComponent } from './header/header.component';
 import { MessagesComponent } from './messages/messages.component';
