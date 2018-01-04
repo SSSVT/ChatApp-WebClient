@@ -9,7 +9,11 @@ import {Observable} from 'rxjs/Observable';
 export class AuthenticationService {
 
   constructor(private http: Http, private router: Router) {
+    //this.apiURL = 'http://localhost:56120/api/v1'; //PC
+    this.apiURL = 'http://localhost:50212/api/v1';  // NTB
   }
+
+  apiURL;
 
   get currentUser(){
     let token = localStorage.getItem('token');
@@ -24,7 +28,7 @@ export class AuthenticationService {
     headers.append('Content-Type', 'application/json');
     const options = new RequestOptions({headers: headers});
 
-    return this.http.post('http://localhost:56120/api/v1/Token/LoginAsync/', JSON.stringify(credentials), options)
+    return this.http.post(this.apiURL + '/Token/LoginAsync/', JSON.stringify(credentials), options)
       .map(response => {
         let result = response.json();
         if (result && result.token) {
@@ -40,7 +44,7 @@ export class AuthenticationService {
     headers.append('Content-Type', 'application/json');
     const options = new RequestOptions({headers: headers});
 
-    return this.http.post('http://localhost:56120/api/v1/registration/Register/', JSON.stringify(user), options);
+    return this.http.post(this.apiURL + '/registration/Register/', JSON.stringify(user), options);
   }
 
   logoutUser() {
