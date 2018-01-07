@@ -1,7 +1,29 @@
-<div *ngIf="authService.isLoggedIn()" class="alert alert-danger">
-  {{ authService.currentUser.sub }}
-  <button  (click)="authService.logoutUser()" class="btn btn-light">
-    Logout
+<nav class="navbar navbar-expand-md navbar-light bg-light mb-4">
+  <span
+    class="navbar-brand"
+    *ngIf="authService.isLoggedIn()">
+    Welcome  <b>{{ authService.currentUser.sub }}</b>
+  </span>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
   </button>
-</div>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <button
+          class="btn btn-dark"
+          (click)="authService.logoutUser()">
+          Logout
+        </button>
+      </li>
+      <li class="nav-item">
+        <button
+          class="btn btn-dark"
+          (click)="userService.getAllUsers()">
+          Logout
+        </button>
+      </li>
+    </ul>
+  </div>
+</nav>
 

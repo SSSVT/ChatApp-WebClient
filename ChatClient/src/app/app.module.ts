@@ -4,7 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import {AuthenticationGuard} from './authentication.guard';
+import { AuthenticationGuard } from './authentication.guard';
+import { RedirectGuard } from './guards/redirect.guard';
 
 import { AuthenticationService } from './authentication.service';
 import { UserService } from './user.service';
@@ -16,6 +17,7 @@ import { RegisterFormComponent } from './register-form/register-form.component';
 import { FriendsComponent } from './friends/friends.component';
 import { HeaderComponent } from './header/header.component';
 import { MessagesComponent } from './messages/messages.component';
+import { RoomsComponent } from './rooms/rooms.component';
 
 
 const appRoutes: Routes = [
@@ -27,6 +29,7 @@ const appRoutes: Routes = [
   {
     path: 'login',
     component: LoginFormComponent,
+    canActivate: [RedirectGuard]
   },
   {
     path: 'chat',
@@ -36,6 +39,7 @@ const appRoutes: Routes = [
   {
     path: 'register',
     component: RegisterFormComponent,
+    canActivate: [RedirectGuard]
   }
 ];
 
@@ -47,7 +51,8 @@ const appRoutes: Routes = [
     RegisterFormComponent,
     FriendsComponent,
     HeaderComponent,
-    MessagesComponent
+    MessagesComponent,
+    RoomsComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +64,8 @@ const appRoutes: Routes = [
     AuthenticationService,
     UserService,
 
-    AuthenticationGuard
+    AuthenticationGuard,
+    RedirectGuard
   ],
   bootstrap: [AppComponent]
 })

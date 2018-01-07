@@ -149,11 +149,21 @@
       id="birthdate"
       class="form-control"
       type="date"
-      required>
+      required
+      (change)="isBirthdateValid(birthdate.value)"
+      >
     <div
       class="alert alert-danger"
       *ngIf="birthdate.touched && !birthdate.valid">
-      Birthdate is required.
+      <div
+      *ngIf="birthdate.errors.required">
+        Birthdate is required.
+      </div>
+    </div>
+    <div
+      class="alert alert-danger"
+      *ngIf="!birthdateValid && birthdate.touched">
+      You must be older than 13.
     </div>
   </div>
   <div class="form-group">
@@ -211,7 +221,7 @@
   <button
     class="btn btn-lg btn-primary btn-block"
     type="submit"
-    [disabled]="!form.valid">
+    [disabled]="!form.valid || !birthdateValid">
     Register
   </button>
   <a routerLink="/login">Already have an account?</a>

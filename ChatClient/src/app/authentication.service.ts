@@ -9,8 +9,8 @@ import {Observable} from 'rxjs/Observable';
 export class AuthenticationService {
 
   constructor(private http: Http, private router: Router) {
-    //this.apiURL = 'http://localhost:56120/api/v1'; //PC
-    this.apiURL = 'http://localhost:50212/api/v1';  // NTB
+    this.apiURL = 'http://localhost:56120/api/v1'; //PC
+    //this.apiURL = 'http://localhost:50212/api/v1';  // NTB
   }
 
   apiURL;
@@ -20,7 +20,8 @@ export class AuthenticationService {
     if(!token)
       return null;
 
-    return new JwtHelper().decodeToken(token);;
+    let decoded = new JwtHelper().decodeToken(token);
+    return decoded;
   }
 
   loginUser(credentials) {
