@@ -10,18 +10,28 @@
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <button
-          class="btn btn-dark"
+        <a
+          href="#"
+          class="nav-link"
           (click)="authService.logoutUser()">
           Logout
-        </button>
+        </a>
       </li>
       <li class="nav-item">
-        <button
-          class="btn btn-dark"
+        <a
+          class="nav-link"
+          href="#"
+          (click)="userService.getCurrentUser()">
+          Debug - Get Current user
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          href="#"
           (click)="userService.getAllUsers()">
-          Logout
-        </button>
+          Debug - Get All Users
+        </a>
       </li>
     </ul>
   </div>

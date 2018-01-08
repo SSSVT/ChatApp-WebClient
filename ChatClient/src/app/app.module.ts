@@ -7,8 +7,8 @@ import { HttpModule } from '@angular/http';
 import { AuthenticationGuard } from './authentication.guard';
 import { RedirectGuard } from './guards/redirect.guard';
 
-import { AuthenticationService } from './authentication.service';
-import { UserService } from './user.service';
+import { AuthenticationService } from './services/authentication.service';
+import { UserService } from './services/user.service';
 
 import { AppComponent } from './app.component';
 import { LoginFormComponent } from './login-form/login-form.component';
@@ -18,6 +18,7 @@ import { FriendsComponent } from './friends/friends.component';
 import { HeaderComponent } from './header/header.component';
 import { MessagesComponent } from './messages/messages.component';
 import { RoomsComponent } from './rooms/rooms.component';
+import { PasswordresetFormComponent } from './passwordreset-form/passwordreset-form.component';
 
 
 const appRoutes: Routes = [
@@ -29,6 +30,11 @@ const appRoutes: Routes = [
   {
     path: 'login',
     component: LoginFormComponent,
+    canActivate: [RedirectGuard]
+  },
+  {
+    path: 'reset',
+    component: PasswordresetFormComponent,
     canActivate: [RedirectGuard]
   },
   {
@@ -52,7 +58,8 @@ const appRoutes: Routes = [
     FriendsComponent,
     HeaderComponent,
     MessagesComponent,
-    RoomsComponent
+    RoomsComponent,
+    PasswordresetFormComponent
   ],
   imports: [
     BrowserModule,
