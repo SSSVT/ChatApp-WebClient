@@ -1,19 +1,12 @@
 import {JwtHelper, tokenNotExpired} from 'angular2-jwt';
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
-import { Router } from '@angular/router';
+import { Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
+import {ApiService} from './api.service';
 
 @Injectable()
-export class AuthenticationService {
-
-  constructor(private http: Http, private router: Router) {
-    //this.apiURL = 'http://localhost:56120/api/v1'; //PC
-    this.apiURL = 'http://localhost:50212/api/v1';  // NTB
-  }
-
-  apiURL;
+export class AuthenticationService extends ApiService {
 
   get currentUser(){
     let token = localStorage.getItem('token');
