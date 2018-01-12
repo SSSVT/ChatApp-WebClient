@@ -4,12 +4,11 @@
       <th>
         Friends
       </th>
-      <th colspan="4"> </th>
       <th>
         <button
           class="btn btn-dark"
           (click)="findFriend(inputFriend.value)">
-          Add new friend
+          Add
         </button>
       </th>
       <th>
@@ -20,7 +19,9 @@
   <tbody *ngFor="let friend of friends">
   <tr>
     <td>
+      <b>
       {{ friend.username }}
+      </b>
     </td>
     <td>
       {{ friend.firstName }}

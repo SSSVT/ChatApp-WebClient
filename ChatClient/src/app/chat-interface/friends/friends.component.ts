@@ -10,19 +10,18 @@ export class FriendsComponent implements OnInit {
   constructor(private userService: UserService) {
   }
 
-  currentUser: any;
-  friends: any;
 
+  friends: any[];
 
   ngOnInit() {
-    this.userService.getCurrentUser().map((response) =>  {
-      this.currentUser = response;
-    });
-    console.log(this.currentUser);
+    this.setFriends();
   }
 
   setFriends() {
-    this.friends = this.userService.getFriends(this.currentUser.id);
+    this.userService.getAllUsers().subscribe(
+      response => {
+       this.friends = response.json();
+      });
   }
 
   findFriend(username: string){

@@ -9,6 +9,8 @@ import { RedirectGuard } from './guards/redirect.guard';
 
 import { AuthenticationService } from './services/authentication.service';
 import { UserService } from './services/user.service';
+import {ApiService} from './services/api.service';
+import {ChatroomService} from './services/chatroom.service';
 
 import { AppComponent } from './app.component';
 import { LoginFormComponent } from './authentication-interface/login-form/login-form.component';
@@ -72,6 +74,8 @@ const appRoutes: Routes = [
   providers: [
     AuthenticationService,
     UserService,
+    ApiService,
+    ChatroomService,
 
     AuthenticationGuard,
     RedirectGuard

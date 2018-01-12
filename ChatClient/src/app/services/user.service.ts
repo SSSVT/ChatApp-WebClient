@@ -10,10 +10,7 @@ export class UserService extends ApiService {
     headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
     const options = new RequestOptions({headers: headers});
 
-    return this.http.get(this.apiURL + '/users/FindAll', options)
-      .subscribe(response => {
-        console.log(response);
-      });
+    return this.http.get(this.apiURL + '/users/FindAll', options);
   }
 
   getCurrentUser() {
@@ -21,8 +18,7 @@ export class UserService extends ApiService {
     headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
     const options = new RequestOptions({headers: headers});
 
-    return this.http.get(this.apiURL + '/users/GetCurrentUser', options)
-      .map((response) => response.json());
+    return this.http.get(this.apiURL + '/users/GetCurrentUser', options);
   }
 
 
@@ -31,10 +27,7 @@ export class UserService extends ApiService {
     headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
     const options = new RequestOptions({headers: headers});
 
-    this.http.get( this.apiURL + '/Friendships/GetAcceptedByUserIDAsync/' + userId, options)
-      .subscribe(response => {
-        return response;
-      });
+    return this.http.get( this.apiURL + '/Friendships/GetAcceptedByUserIDAsync/' + userId, options);
   }
 
   findFriend(username: string ) {
@@ -42,10 +35,15 @@ export class UserService extends ApiService {
     headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
     const options = new RequestOptions({headers: headers});
 
-    this.http.get( this.apiURL + '/api/v1/users/FindByUsername/' + username, options)
-      .subscribe(response => {
-        return response;
-      });
+    return this.http.get( this.apiURL + '/api/v1/users/FindByUsername/' + username, options);
   }
 
+
+  getFriendRequests(userID){
+    const headers = new Headers();
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.get( this.apiURL + '/api/v1/Friendships/GetReceivedAndPendingByUserID/' + userID, options);
+  }
 }

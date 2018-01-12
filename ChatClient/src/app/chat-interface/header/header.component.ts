@@ -8,8 +8,30 @@ import { ChatcomponentComponent } from '../chatcomponent/chatcomponent.component
 })
 export class HeaderComponent extends ChatcomponentComponent implements OnInit {
 
-  amountOfRequests = 0;
+  private friendRequests: any[];
+  private amountOfRequests: number;
+  private currentUser: any;
 
   ngOnInit() {
+    this.setCurrentUser();
   }
+
+  setCurrentUser(){
+    this.userService.getCurrentUser().subscribe(
+      (response) => {
+          this.currentUser = response.json();
+        });
+  }
+
+  setFriendRequests(){
+    this.userService.getFriendRequests(this.currentUser.id)
+      .subscribe(
+      response => {
+        this.friendRequests = response.json();
+      }
+    );
+
+    this.amountOfRequests = this.friendRequests.length;
+  }
+
 }
