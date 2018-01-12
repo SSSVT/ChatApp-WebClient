@@ -9,8 +9,8 @@ import {Router} from '@angular/router';
 export class ChatroomService extends ApiService{
 
   constructor(
-    private http: Http,
-    private router: Router,
+    protected http: Http,
+    protected router: Router,
     private authService: AuthenticationService,
     private userService: UserService){
     super(http, router);
@@ -20,18 +20,14 @@ export class ChatroomService extends ApiService{
 
   }
 
-  getRoomMessages(){
-
-  }
-
-  getFriends(){
+  getRoomMessages(roomId: number) {
     const headers = new Headers();
     headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
     const options = new RequestOptions({headers: headers});
 
-    let currentUserID =
-
-    let friends = this.http.get( this.apiURL + '/Friendships/GetAcceptedByUserIDAsync/' + currentUserID, options)
+    this.http.get( this.apiURL + '/Friendships/GetAcceptedByUserIDAsync/' + roomId, options)
+      .subscribe(response => {
+        return response;
+      });
   }
-
 }

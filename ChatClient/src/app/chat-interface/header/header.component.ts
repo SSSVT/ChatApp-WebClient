@@ -8,6 +8,8 @@ import { ChatcomponentComponent } from '../chatcomponent/chatcomponent.component
 })
 export class HeaderComponent extends ChatcomponentComponent implements OnInit {
 
+  amountOfRequests = 0;
+
   ngOnInit() {
   }
 }

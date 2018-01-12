@@ -1,9 +1,33 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Friends</th>
+      <th>
+        Friends
+      </th>
+      <th colspan="4"> </th>
+      <th>
+        <button
+          class="btn btn-dark"
+          (click)="findFriend(inputFriend.value)">
+          Add new friend
+        </button>
+      </th>
+      <th>
+        <input #inputFriend class="form-control" type="text">
+      </th>
     </tr>
   </thead>
-  <tbody *ngFor="">
+  <tbody *ngFor="let friend of friends">
+  <tr>
+    <td>
+      {{ friend.username }}
+    </td>
+    <td>
+      {{ friend.firstName }}
+    </td>
+    <td>
+      {{ friend.lastName }}
+    </td>
+  </tr>
   </tbody>
 </table>

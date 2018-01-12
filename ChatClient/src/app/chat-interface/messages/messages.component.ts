@@ -8,6 +8,8 @@ import {ChatcomponentComponent} from '../chatcomponent/chatcomponent.component';
 })
 export class MessagesComponent extends ChatcomponentComponent implements OnInit {
 
+  messages: any;
+
   ngOnInit() {
   }
 

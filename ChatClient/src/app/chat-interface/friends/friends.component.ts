@@ -6,15 +6,27 @@ import { UserService } from '../../services/user.service';
   templateUrl: './friends.component.html',
   styleUrls: ['./friends.component.css']
 })
-export class FriendsComponent implements OnInit{
-
+export class FriendsComponent implements OnInit {
   constructor(private userService: UserService) {
-    this.currentUser = this.userService.getCurrentUser();
-  }
-
-  ngOnInit() {
   }
 
   currentUser: any;
+  friends: any;
+
+
+  ngOnInit() {
+    this.userService.getCurrentUser().map((response) =>  {
+      this.currentUser = response;
+    });
+    console.log(this.currentUser);
+  }
+
+  setFriends() {
+    this.friends = this.userService.getFriends(this.currentUser.id);
+  }
+
+  findFriend(username: string){
+
+  }
 
 }
