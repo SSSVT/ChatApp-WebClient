@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light mb-4">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
   <span
     class="navbar-brand"
     *ngIf="authService.isLoggedIn()">
@@ -17,27 +17,32 @@
           Logout
         </a>
       </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          href="#"
-          (click)="userService.getCurrentUser()">
-          Debug - Get Current user
-        </a>
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          href="#"
-          (click)="userService.getAllUsers()">
-          Debug - Get All Users
-        </a>
-      </li>
     </ul>
   </div>
   <span
-  class="friend-requests">
-    You have {{ amountOfRequests }} new friends requests.
+  class="friend-requests text-white"
+  (click)="showFriendRequests()"
+  *ngIf="amountOfRequests">
+    You have <b>{{ amountOfRequests }}</b> new friend request(s).
   </span>
 </nav>
+<div
+  class="w-100 alert alert-info text-center"
+  *ngIf="showRequests">
+  <div
+    class="request"
+    *ngFor="let request of friendRequests; trackBy: trackFriendRequests">
+    <b>{{ request.sender.firstName }} {{ request.sender.lastName }}</b> wants to add you!
+    <button
+      class="btn btn-light btn-outline-dark"
+      (click)="acceptFriendRequest(request)">
+      Accept
+    </button>
+    <button
+      class="btn btn-light btn-outline-dark"
+      (click)="declineFriendRequest(request)">
+      Decline
+    </button>
+  </div>
+</div>
 

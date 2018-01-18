@@ -1,33 +1,63 @@
+<div
+  class="alert alert-success"
+  *ngIf="hasFriendRequestSent">
+  Friend request successfully sent!
+</div>
+<div
+  class="alert alert-danger"
+  *ngIf="hasFriendRequestError">
+  Username doesn't exist. Please try again.
+</div>
+
 <table class="table">
-  <thead>
+  <thead class="thead-dark">
     <tr>
-      <th>
+      <th id="table-title">
         Friends
+      </th>
+      <th colspan="2">
+        <input
+          #inputFriend
+          class="form-control"
+          type="text"
+          placeholder="Type in user's username..."
+          (keydown)="resetInfoAlert()">
       </th>
       <th>
         <button
-          class="btn btn-dark"
-          (click)="findFriend(inputFriend.value)">
+          class="btn btn-dark btn-outline-light"
+          (click)="addFriend(inputFriend)">
           Add
         </button>
       </th>
-      <th>
-        <input #inputFriend class="form-control" type="text">
-      </th>
     </tr>
   </thead>
-  <tbody *ngFor="let friend of friends">
-  <tr>
+  <tbody>
+  <tr
+    class="friend"
+    *ngFor="let friendship of acceptedFriendships; trackBy: trackFriend">
     <td>
-      <b>
-      {{ friend.username }}
+      <b *ngIf="friendship.recipient.id === currentUser.id">
+        {{ friendship.sender.username }}
+      </b>
+      <b *ngIf="friendship.sender.id === currentUser.id">
+        {{ friendship.recipient.username }}
       </b>
     </td>
     <td>
-      {{ friend.firstName }}
+      <span *ngIf="friendship.recipient.id === currentUser.id">{{ friendship.sender.firstName }}</span>
+      <span *ngIf="friendship.sender.id === currentUser.id">{{ friendship.recipient.firstName }}</span>
     </td>
     <td>
-      {{ friend.lastName }}
+      <span *ngIf="friendship.recipient.id === currentUser.id">{{ friendship.sender.lastName }}</span>
+      <span *ngIf="friendship.sender.id === currentUser.id">{{ friendship.recipient.lastName }}</span>
+    </td>
+    <td>
+      <button
+        class="btn btn-light btn-outline-dark"
+        (click)="removeFriendship(friendship)">
+        X
+      </button>
     </td>
   </tr>
   </tbody>

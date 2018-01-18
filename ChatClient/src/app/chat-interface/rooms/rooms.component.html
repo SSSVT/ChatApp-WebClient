@@ -1,9 +1,93 @@
+<div
+  class="alert alert-success"
+  *ngIf="hasBeenRoomCreated">
+  Room has been successfully created!
+</div>
 <table class="table">
-  <thead>
-  <tr>
-    <th>Rooms</th>
-  </tr>
+  <thead class="thead-dark">
+    <tr>
+      <th id="table-title">Rooms</th>
+      <th>
+        <button
+          class="btn btn-dark btn-outline-light"
+          (click)="startRoomCreation()">
+          Create room
+        </button>
+      </th>
+      <th>
+        <button
+          class="btn btn-dark btn-outline-light"
+          (click)="leaveRoom()">
+          Leave room
+        </button>
+      </th>
+    </tr>
   </thead>
-  <tbody *ngFor="">
+  <tbody>
+  <tr
+    class="room"
+    *ngFor="let room of rooms; trackBy: trackRoom"
+    (click)="changeRoom(room.id)">
+    <td>
+      <b>{{room.name}}</b>
+    </td>
+    <td colspan="3">
+      {{room.description}}
+    </td>
+  </tr>
   </tbody>
 </table>
+
+<form
+  ngForm
+  #form="ngForm"
+  (ngSubmit)="createRoom(form.value)">
+  <table class="table">
+
+  <tbody *ngIf="isRoomCreating">
+  <tr>
+    <th>
+      Room name:
+    </th>
+    <td>
+      <input
+        ngModel
+        name="roomName"
+        #roomName="ngModel"
+        id="roomName"
+        class="form-control"
+        placeholder="Type in room's name"
+        required>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      Room description:
+    </th>
+    <td>
+      <input
+        ngModel
+        name="roomDescription"
+        #roomDescription="ngModel"
+        id="roomDescription"
+        class="form-control"
+        placeholder="Type in room's description">
+    </td>
+  </tr>
+  <tr>
+    <td class="text-center" colspan="3">
+      <button
+        class="btn btn-light btn-outline-dark"
+        type="submit"
+        [disabled]="!form.valid">
+        √
+      </button>
+      <button
+        class="btn btn-light btn-outline-dark"
+        (click)="cancelRoomCreation()">X</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</form>
+

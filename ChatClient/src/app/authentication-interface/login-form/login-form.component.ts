@@ -22,7 +22,7 @@ export class LoginFormComponent implements OnInit {
     this.authService.loginUser(credentials)
       .subscribe(result => {
         if (result) {
-          let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+          const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
           this.router.navigate([ returnUrl || '/']);
         } else {
           this.invalidLogin = true;

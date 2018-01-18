@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../services/authentication.service';
+import { AuthenticationService } from '../../services/authentication.service';
 import {createUrlResolverWithoutPackagePrefix} from '@angular/compiler';
 
 @Component({
@@ -20,16 +20,16 @@ export class RegisterFormComponent implements OnInit {
   }
 
   isBirthdateValid(date){
-    let currentDate = new Date();
-    let currentYear = currentDate.getFullYear();
-    let currentMonth = currentDate.getMonth();
-    let currentDay = currentDate.getDay();
-    let wrongYear = currentYear  - 13;
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth();
+    const currentDay = currentDate.getDay();
+    const wrongYear = currentYear  - 13;
 
 
-    let inputYear = date.substring(0,4);
-    let inputMonth = date.substring(5,7);
-    let inputDay = date.substring(8,10);
+    const inputYear = date.substring(0, 4);
+    const inputMonth = date.substring(5, 7);
+    const inputDay = date.substring(8, 10);
 
     this.birthdateValid = inputYear <= wrongYear;
     /*

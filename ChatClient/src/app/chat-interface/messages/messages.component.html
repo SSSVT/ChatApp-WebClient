@@ -1,26 +1,117 @@
-<div class="row chatbox">
-  <ul class="list-unstyled w-100">
-    <li class="row">
-      <span class="other-message">
-        Ahoj
+<div
+  class="chatbox-title alert alert-info"
+  *ngIf="roomName">
+  <div id="title">
+    <p id="title-message">You are currently chatting in room <b>{{roomName}}</b></p>
+    <button
+      class="btn btn-outline-dark float-right btn-invite"
+      *ngIf="roomOwnerID === currentUser.id"
+      (click)="showUsersForInvitation()">
+      Invite users to the room
+    </button>
+  </div>
+  <div
+    id="invitePanel"
+    *ngIf="isInviteShown">
+    <table class="table">
+      <thead class="thead-dark">
+      <tr>
+        <th class="text-xl-center" colspan="4">
+          Select friends to invite
+        </th>
+      </tr>
+      <tr>
+        <th>Username</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Invite</th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let friendship of friendshipsToInvite">
+      <tr
+        class="friend"
+        *ngIf="friendship.recipient.id === currentUser.id">
+        <td>
+          <b>
+            {{ friendship.sender.username }}
+          </b>
+        </td>
+        <td>
+          {{ friendship.sender.firstName }}
+        </td>
+        <td>
+          {{ friendship.sender.lastName }}
+        </td>
+        <td>
+          <button
+            #btn
+            class="btn btn-outline-dark"
+            (click)="inviteFriendToRoom(btn, friendship.sender.id)">
+            Invite
+          </button>
+        </td>
+      </tr>
+      <tr
+        class="friend"
+        *ngIf="friendship.sender.id === currentUser.id">
+        <td>
+          <b>
+            {{ friendship.recipient.username }}
+          </b>
+        </td>
+        <td>
+          {{ friendship.recipient.firstName }}
+        </td>
+        <td>
+          {{ friendship.recipient.lastName }}
+        </td>
+        <td>
+          <button
+            #btn2
+            class="btn btn-outline-dark"
+            (click)="inviteFriendToRoom(btn2, friendship.recipient.id)">
+            Invite
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="container-fluid chatbox">
+  <ul    
+    class="list-unstyled"
+    #scrollMe
+    [scrollTop]="scrollMe.scrollHeight">
+    <li
+      class="row message"
+      [class.my-message]="message.idUser === currentUser.id"
+      [class.float-right]="message.idUser === currentUser.id"
+      [class.other-message]="message.idUser !== currentUser.id"
+      *ngFor="let message of messages; trackBy: trackMessage">
+      <span *ngIf="message.idUser !== currentUser.id">
+        <b> {{message.sender}} : </b> {{message.content}}
       </span>
-    </li>
-    <li class="row float-right">
-      <span class="my-message">
-        Jak se máš? Doufám, že dobře, když ne, tak to nevadí.
+      <span *ngIf="message.idUser === currentUser.id">
+        <b>Me: </b> {{message.content}}
       </span>
     </li>
   </ul>
 </div>
-<div class="row messageBox">
-    <div class="col-8">
+<div class="container-fluid messageBox">
+    <div class="input-message">
       <input
+        #messageBox
         class="form-control"
         type="text"
-        placeholder="Type in your message.">
+        placeholder="Type in your message."
+        (keyup.enter)="onEnter(messageBox)">
     </div>
-    <div class="col-4">
-      <button class="btn btn-dark">
+    <div class="button-send">
+      <button
+        class="btn btn-dark btn-outline-dark"
+        (click)="sendMessage(messageBox)"
+        [disabled]="!_currentRoomID">
         Send
       </button>
     </div>

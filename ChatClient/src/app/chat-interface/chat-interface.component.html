@@ -1,24 +1,16 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="w-100">
-      <app-header></app-header>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-4">
-      <div class="row">
-        <div class="col-12">
-          <app-friends></app-friends>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <app-rooms></app-rooms>
-        </div>
-      </div>
-    </div>
-    <div class="col-8">
-      <app-messages></app-messages>
+<div class="container-fluid p-0">      
+  <app-header></app-header>    
+  <div class="container-fluid p-0 main">    
+    <div class="controls">
+      <div class="friends">
+        <app-friends></app-friends>
+      </div>            
+      <div class="rooms">
+        <app-rooms (roomChangedEvent)="receiveChangedRoom($event)" [currentUser]="currentUser"></app-rooms>
+      </div>          
+    </div>    
+    <div class="messages">
+      <app-messages [currentRoomID]="currentRoomID" [currentUser]="currentUser" ></app-messages>
     </div>
   </div>
 </div>

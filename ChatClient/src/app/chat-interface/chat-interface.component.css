@@ -2,3 +2,24 @@
   min-height: 100%;
   height: 100%;
 }
+
+.controls{
+  display: flex;
+  flex-direction: column;
+}
+
+.friends{
+  flex: 1;
+}
+
+.rooms{
+  flex: 1;
+}
+
+.messages{
+  flex: 2;
+}
+
+.main{
+  display: flex;
+}
