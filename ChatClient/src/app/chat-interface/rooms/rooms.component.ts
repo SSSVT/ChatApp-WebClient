@@ -15,13 +15,13 @@ export class RoomsComponent extends ChatcomponentComponent implements OnDestroy,
   rooms: any;
   isRoomCreating: boolean;
   hasBeenRoomCreated: boolean;
-
+  currentRoomID: string;
   @Output() roomChangedEvent = new EventEmitter<number>();
   @Input() currentUser;
 
   async ngOnInit() {
     await this.getRooms();
-    this.intervalSubscription = IntervalObservable.create(5000).subscribe(() => {
+    this.intervalSubscription = IntervalObservable.create(1000).subscribe(() => {
       this.getRooms();
     });
   }
@@ -53,6 +53,20 @@ export class RoomsComponent extends ChatcomponentComponent implements OnDestroy,
     this.isRoomCreating = false;
   }
 
+
+  leaveRoom(){
+    if(this.currentRoomID !== undefined ){
+      console.log(this.currentRoomID)
+      this.chatService.leaveRoom(this.currentRoomID).subscribe();
+
+      this.currentRoomID = undefined;
+    }
+  }
+
+  removeRoom(roomID){
+    this.chatService.removeRoom(roomID).subscribe();
+  }
+
   startRoomCreation(){
     this.isRoomCreating = true;
     this.hasBeenRoomCreated = false;
@@ -63,6 +77,7 @@ export class RoomsComponent extends ChatcomponentComponent implements OnDestroy,
   }
 
   changeRoom(roomID){
+    this.currentRoomID = roomID;
     this.roomChangedEvent.emit(roomID);
   }
 

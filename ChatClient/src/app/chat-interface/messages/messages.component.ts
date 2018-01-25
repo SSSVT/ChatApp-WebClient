@@ -36,7 +36,7 @@ export class MessagesComponent extends ChatcomponentComponent implements OnDestr
 
 
   ngOnInit() {
-    this.intervalSubscription = IntervalObservable.create(5000).subscribe(() => {
+    this.intervalSubscription = IntervalObservable.create(1000).subscribe(() => {
       if(this.currentRoomID){
         this.loadRoomMessages(this.currentRoomID);
       }

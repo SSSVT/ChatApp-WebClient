@@ -32,7 +32,7 @@ export class FriendsComponent implements OnDestroy, OnInit {
     );
 
 
-    this.intervalSubscription = IntervalObservable.create(5000).subscribe(() => {
+    this.intervalSubscription = IntervalObservable.create(1000).subscribe(() => {
     this.userService.getCurrentUser()
       .subscribe(
         (response) => {

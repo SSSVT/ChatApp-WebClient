@@ -18,7 +18,7 @@
         <button
           class="btn btn-dark btn-outline-light"
           (click)="leaveRoom()">
-          Leave room
+          Leave current room
         </button>
       </th>
     </tr>
@@ -31,8 +31,15 @@
     <td>
       <b>{{room.name}}</b>
     </td>
-    <td colspan="3">
+    <td>
       {{room.description}}
+    </td>
+    <td class="text-right">
+      <button
+        class="btn btn-light btn-outline-dark"
+        (click)="removeRoom(room.id)">
+        X
+      </button>
     </td>
   </tr>
   </tbody>

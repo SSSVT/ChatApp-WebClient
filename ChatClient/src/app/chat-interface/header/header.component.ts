@@ -19,7 +19,7 @@ export class HeaderComponent extends ChatcomponentComponent implements OnDestroy
   async ngOnInit() {
     await this.setCurrentUserAndRequests();
 
-    this.intervalSubscription = IntervalObservable.create(5000).subscribe(() => {
+    this.intervalSubscription = IntervalObservable.create(1000).subscribe(() => {
       this.setFriendRequests(this.currentUser.id);
     });
   }

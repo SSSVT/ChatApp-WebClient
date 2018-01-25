@@ -79,7 +79,13 @@ export class ChatroomService extends ApiService{
     return this.http.post( this.apiURL + '/Participants/PostParticipantAsync/', body, {headers: header});
   }
 
-  leaveRoom(){
+  leaveRoom(roomID: string){
+    const header = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.http.delete( this.apiURL + '/Rooms/LeaveRoom/' + roomID, {headers: header});
+  }
 
+  removeRoom(roomID: string){
+    const header = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.http.delete( this.apiURL + '/Rooms/DeleteAsync/' + roomID, {headers: header});
   }
 }
